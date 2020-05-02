@@ -1,0 +1,105 @@
+\input{preamble.tex}
+
+\usepackage[T1]{fontenc}
+\usepackage{thmtools}
+\usepackage{fancyhdr}
+%\pagestyle{plain}
+\newsavebox{\myheadbox}
+\fancyhf{}
+%\begin{flushright}
+\lhead{
+Jonas Conneryd \\ \url{conneryd@kth.se}}
+%\end{flushright}
+\rhead{970731-7559  \\
+\the\year
+}
+\chead{\Large{\textbf{\textsf{Mathematical Communication}}}}
+\cfoot{\thepage}
+\declaretheoremstyle[headfont=\large\bfseries\sffamily]{normalhead}
+\interfootnotelinepenalty=10000
+%\title{\vspace{-2cm}\textbf{\textsf{ Homework 3}}}
+\date{}
+%\author{Jonas Conneryd \\
+%conneryd@kth.se \\ 970731-7559}
+\begin{document}
+%\maketitle
+\thispagestyle{fancy}
+\theoremstyle{normalhead}
+%\newtheorem{problem}{Problem}
+\newtheorem{assignment}{Assignment}
+
+\begin{assignment}
+Write down concise answers to the following questions. Imagine that you
+got them from a curious first year student or a friend who is interested in
+mathematics.
+\begin{enumerate}[wide]
+\item Why is $0! = 1$?
+\item Why is $a^0 = 1$ for $a \neq 0$?
+\item What is $2/3$?
+\item Why is $2/3 = 4/6$?
+\item The student has heard that one can actually define the logarithm
+function as
+\[
+\ln x =\int_1^x \frac{\emph{d} t}{t}, \quad x >0
+\]
+and wants to know more. Show the student how this is done. Derive the logarithm laws and prove other properties of the logarithm function. Show that it has an inverse and derive its properties. In particular show that if the inverse is denoted by $g$, then $g(n) = e·e·. . .·e$
+with n factors, where e is defined as the solution to the equation
+Z e
+1
+dt
+t
+= 1.
+Which theorems from calculus do you have to use? What advantages
+and disadvantages does this and the traditional definition have?
+\end{enumerate}
+\end{assignment}
+\begin{proof}[Answer]
+\hfill
+
+\begin{enumerate}[wide]
+\item In mathematics, the worlds in which we work and solve problems are of our own construction. Sometimes, we can make these worlds look and feel like the world in which we live, in which case a mathematical construction might help us understand our world better. Combinatorial concepts are often exceptionally closely related to the real world, and the factorial in particular is our mathematical way of speaking about the ways in which one can arrange a set of objects in an orderly fashion: If you have $n$ objects, we could define that there are $n!$ ways to arrange the objects into a tuple. (This coincides with the usual definition of $n! = n\cdot(n-1)\ldots 2 \cdot 1$ for natural numbers.) It is almost immediate that if you were to obtain an additional object, the number of ways to order all objects is now $n+1$ times that of the case where there are only $n$ objects, since the tuple length grows by 1 and you have an additional object to choose from in every step of putting objects in the tuple. Hence we get the relation
+\[
+(n+1)! = (n+1)n!.
+\]
+So far, we have assumed that the number of objects $n$ is positive - otherwise, what is there to order? Therefore, whatever we decide to do with the factorial of numbers that are not positive would not make a difference in the neat way in which we captured the notion of arranging (a positive number of) objects in different orders using the factorial. There are two natural candidates for $0!$, namely 1 and 0. Making a philosophical statement we consider the case $0! = 1$. What does this do to the factorial? First of all, it not only fulfils the pleasant recursive relation above (indeed, $(0 + 1)! = (0+1)0!$), it actually allows us to \textit{define} the factorial recursively:
+\[
+n! \coloneqq
+\begin{cases}
+n\cdot(n-1)!, &\quad n > 0, \\
+1, &\quad n = 0.
+\end{cases}
+\]
+Conversely, neither of these properties are fulfilled if we choose to define $0! = 0$. It seems that mathematics has quite a strong opinion on which road to take. The one caveat is philosophical; in some ways, saying that there are zero ways to order something (since there is nothing to order!) is perhaps more natural than saying there is one way to order zero objects. But maybe this \textit{one} way to order zero objects is doing nothing? Mathematics sure seems to think so, and it seems rude of us to pay no heed to its point of view now that it has shown us all these nice properties that we obtain should we choose to listen.
+
+\item Recall the usual definition of exponentiation by a natural number: Let $a \in \mathbb{R}$ (or indeed any ring, field, group or what have you) and $n \in \mathbb{N}^+$. We define
+\[
+a^n = \underbrace{a\cdot a \cdot \ldots \cdot a}_\text{$n$ times}.
+\]
+In addition, we define $a^{-n} = 1/a^n$. Using the definition directly, it is straightforward to show the following lovely laws, familiar from high school: Let $a, b \in \mathbb{R}$ and $n, m \in \mathbb{N}^+$. Then
+\[
+(1): a^n a^m = a^{n+m}, \qquad (2): (a^n)^m = a^{nm}, \qquad (3): a^{n}a^{-m} = a^{n-m}, \qquad (4): (ab)^n = a^nb^n.
+\]
+Where does 0 fit into all of this? We would really like to keep the veracity of equations (1)-(4) upon generalizing to $\mathbb{N}$ instead of $\mathbb{N}^+$ (yes, 0 is a natural number). In that case, what are our candidates? Looking at (1) we get
+\[
+a^n a^0 = a^{n+0} \overset{!}{=} a^n.
+\]
+By cancellation, the only possible candidate is $a^0 = 1$ since $a$ was arbitrary. Does this fit into the other laws? Indeed it does:
+\[
+\begin{aligned}
+&(2): 1 = (a^n)^0 = a^{n\cdot 0} = a^{0\cdot n} = (a^0)^n = 1^n = 1, \\
+&(3): 1 = a^0 = a^{n-n} = a^n a^{-n} = \frac{a^n}{a^n} = 1, \\
+&(4): (ab)^0 = a^0b^0 = 1\cdot 1 = 1.
+\end{aligned}
+\]
+Hence, if we are to keep (1)-(4) true upon generalizing to $\mathbb{N}$, we \textit{have to} define $a^0 = 1$. This turns out to be a fortunate choice, since then one can, upon making the right (quite natural) definitions, extend the concept of exponentiation to rational and even real numbers while keeping (1)-(4) intact. It turns out that listening to Mathematics oftentimes is the right way forward!
+
+\item Suppose you have a cake which weighs one kilogram. Seeing as it's your birthday, you share it with your two best friends. One of them is a little particular about justice and equality, and so you split it into three exactly equally heavy pieces. Then each of these pieces weighs 1/3 kilograms. However, upon realizing that the cake contains cream, your other, lactose intolerant, friend gifts you his entire piece to spite the first. Now your piece weighs 1/3 + 1/3 = 2/3 kilograms. To further annoy your justice-obsessed friend, you put your now giant piece on your infinitely accurate kitchen scale. The display shows $0.\overline{66}$ kilograms, and both of your friends are angry for your sake since you seem to have been cheated at the bakery! You asked for a cake that weighs one kilogram, but you seem to have received one that weighs $0.\overline{99}$ kilograms. However, you tell your friends not to worry:
+\[
+9\cdot 0.\overline{99} = 10\cdot 0.\overline{99} - 0.\overline{99} = 9.\overline{99} - 0.\overline{99} = 9
+\]
+so $0.\overline{99} = 9/9 = 1$, which also implies $0.\overline{66} = 2/3$. You also remember that you asked for lactose-free cream at the bakery. You all eat cake. All is well in the world.
+
+\item One of your friends from the third question has the brilliant idea that if you all split your pieces in half, each of you will have two pieces each to eat and so there is more cake for everyone! Since your other friend studies engineering, she knows that if you could really create more cake by cutting every piece in two then we would finally have hit upon a clean, infinite energy source. Realizing the unlikelihood of this, you deduce that
+\end{enumerate}
+\end{proof}
+\end{document}
