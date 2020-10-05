@@ -3,9 +3,23 @@
 \usepackage[T1]{fontenc}
 \usepackage{thmtools}
 \usepackage{fancyhdr}
+\newcommand{\ddx}{\frac{\text{d}}{\text{d}x}}
 %\pagestyle{plain}
 \newsavebox{\myheadbox}
+\fancypagestyle{normalpage}
+{
+%\begin{flushright}
+\lhead{
+Jonas Conneryd
+}
+%\end{flushright}
+\rhead{\url{conneryd@kth.se}}
+\chead{MM7042 Mathematical Communication}
+\cfoot{\thepage}
+}
 \fancyhf{}
+\fancypagestyle{firstpage}
+{
 %\begin{flushright}
 \lhead{
 Jonas Conneryd \\ \url{conneryd@kth.se}}
@@ -13,9 +27,12 @@ Jonas Conneryd \\ \url{conneryd@kth.se}}
 \rhead{970731-7559  \\
 \the\year
 }
-\chead{\Large{\textbf{\textsf{Mathematical Communication}}}}
+\chead{\Large{\scshape{{Assignment 1} \\ \vspace{-4pt}\normalsize{MM7042 Mathematical Communication}}}}
 \cfoot{\thepage}
-\declaretheoremstyle[headfont=\large\bfseries\sffamily]{normalhead}
+}
+
+\pagestyle{normalpage}
+\declaretheoremstyle[headfont=\scshape]{normalhead}
 \interfootnotelinepenalty=10000
 %\title{\vspace{-2cm}\textbf{\textsf{ Homework 3}}}
 \date{}
@@ -23,7 +40,7 @@ Jonas Conneryd \\ \url{conneryd@kth.se}}
 %conneryd@kth.se \\ 970731-7559}
 \begin{document}
 %\maketitle
-\thispagestyle{fancy}
+\thispagestyle{firstpage}
 \theoremstyle{normalhead}
 %\newtheorem{problem}{Problem}
 \newtheorem{assignment}{Assignment}
@@ -44,11 +61,10 @@ function as
 \]
 and wants to know more. Show the student how this is done. Derive the logarithm laws and prove other properties of the logarithm function. Show that it has an inverse and derive its properties. In particular show that if the inverse is denoted by $g$, then $g(n) = e·e·. . .·e$
 with n factors, where e is defined as the solution to the equation
-Z e
-1
-dt
-t
-= 1.
+\[
+1 =\int_1^e \frac{\emph{d} t}{t}.
+\]
+
 Which theorems from calculus do you have to use? What advantages
 and disadvantages does this and the traditional definition have?
 \end{enumerate}
@@ -99,7 +115,126 @@ Hence, if we are to keep (1)-(4) true upon generalizing to $\mathbb{N}$, we \tex
 \]
 so $0.\overline{99} = 9/9 = 1$, which also implies $0.\overline{66} = 2/3$. You also remember that you asked for lactose-free cream at the bakery. You all eat cake. All is well in the world.
 
-\item One of your friends from the third question has the brilliant idea that if you all split your pieces in half, each of you will have two pieces each to eat and so there is more cake for everyone! Since your other friend studies engineering, she knows that if you could really create more cake by cutting every piece in two then we would finally have hit upon a clean, infinite energy source. Realizing the unlikelihood of this, you deduce that
+\item One of your friends from the third question has the brilliant idea that if you all split your pieces in half, each of you will have two pieces each to eat and so there is more cake for everyone! However, since no cake is eaten or baked in this process, every person must have as much cake as before cutting the pieces. If one person were to have two of the three original pieces, they would have four of the six new pieces. These two amounts are exactly the same quantity of cake, so it must be the case that $2/3 = 4/6$.
+
+\item
+
+The logarithm laws are:
+\begin{enumerate}
+  \item $\ln{ab} = \ln{a} + \ln{b}$.
+  \item $\ln{a^b} = b\ln{a}$.
+  \item $\ln{1/a} = -\ln{a}$.
+  \item $\ln{a/b} = \ln{a} - \ln{b}$.
 \end{enumerate}
+We prove these in order. First of all, note that it is immediate that $\ln{1} = 0$ since we then integrate from 1 to 1.
+\begin{enumerate}
+  \item By the fundamental theorem of calculus, $\ddx \ln{x} = 1/x$. Hence by the chain rule, $\ddx \ln{ax} = a/ax = 1/x$, so we must have that $\ln{ax} = \ln{x} + c$. With $x=1$ this means $\ln{a} = \ln{1} + c = c$, so $c = \ln{a}$. Hence $\ln{ax} = \ln{x} + \ln{a}$.
+  \item Again by the chain rule, $\ddx \ln{x^b} = bx^{b-1}/x^b = b/x= b\ddx \ln{x}$. Hence $\ln{x^b} = \ln{x} + c$. Evaluating at $x=1$ yields $c = 0$ and the assertion follows.
+  \item We have
+  \[
+    0 = \ln{1} = \ln{a/a} = \{\text{(a)}\} = \ln{a} + \ln{1/a},
+  \]
+  so $\ln{1/a} = - \ln{a}$.
+  \item We have
+  \[
+    \ln{a/b} = \{\text{(a)}\}  = \ln{a} + \ln{1/b} = \{\text{(c)}\} = \ln{a} - \ln{b}.
+  \]
+  \end{enumerate}
+  Therefore, the logarithm laws hold for this definition of the natural logarithm. We also note that $\ln{x}$ is strictly increasing and therefore in particular injective:
+  \[
+  \begin{aligned}
+  \ln(x+\epsilon) &= \int_{1}^{x+\epsilon}\frac{1}{t}dt \\
+&= \int_{1}^{x}\frac{1}{t}dt + \int_{x}^{x+\epsilon}\frac{1}{t}dt \\
+&= \ln{x} + \int_{x}^{x+\epsilon}\frac{1}{t}dt \\
+&> \ln{x},
+\end{aligned}
+  \]
+where the last inequality follows from the fact that $1/x$ is positive for all positive $x$. We define $e$ as the number such that $\ln(e) = 1$, i.e.
+  \[
+  1 =\int_1^e \frac{\emph{d} t}{t}.
+  \]
+  We define $g(x) = e^x$. Then $\ln{g(x)} = \ln{e^x} = x\ln{e} = x$. Moreover
+  \[
+  \begin{aligned}
+x &= e^{\ln{x}} \\
+\{\text{by injectivity of $\ln{x}$}\}\iff \ln{x} &= \ln{e^{ln{x}}} \\
+\iff \ln{x} &= \ln{x}\ln{e} \\
+\iff \ln{x} &= \ln{x},
+\end{aligned}
+  \]
+so $g(\ln{x}) = x$, proving that $g(x)$ is the inverse of $\ln{x}$.
+Now for the famous properties of $g(x)$: it is its own derivative and primitive function.
+We have
+\[
+\begin{aligned}
+  1 &= \ddx (\ln(e^x)) \\
+  \{\text{chain rule}\} &= \frac{1}{e^x}\ddx e^x \\
+  \iff e^x &= \ddx e^x.
+\end{aligned}
+\]
+We have
+\[
+\int_0^x e^t dt = \int_0^x \frac{\text{d}}{\text{d}t} e^t dt = e^x - e^0 = e^x + C
+\]
+So $e^x$ is also a primitive function for itself. Finally we note that for a natural number $n$, $g(n) = e^n  = ee\ldots e$ with $n$ factors as was sought.
+
+
+This definition of the logarithm is nice in that it makes it much more straightforward to analyze and derive properties of the logarithm since it is so ''calculus-friendly''. However, to prove the properties of the logarithm we had to use quite a bit of calculus machinery - mostly the chain rule and the fundamental theorem of calculus but also the notion of an injective function - to arrive at our conclusion. In comparison, the usual definition usually requires little more than general mathematical reasoning. The usual definition is also much more intuitive and easy to explain than this definition, and this definition of $e$ the fact that $e$ has the properties it does seem much more ''arbitrary'' than it actually is, since the connection to compound interest and related notions is obscured.
+\end{enumerate}
+\end{proof}
+\newpage
+
+
+
+\stepcounter{assignment}
+\begin{assignment}
+  Write down your thoughts on the lectures I will give the first three times
+we meet. What was good? What was not so good and could be improved?
+Why? I prepared the lectures for different audiences in mind. Were they
+on the appropriate level? Were the objectives clearly stated? How were
+the slides? Stuffed, impossible to read and understand, excellent? What
+did you learn from the lectures? Mathematicians use words like ”hence”,
+”thus”, ”therefore” and so on, i.e words that indicate logical implication
+or some sort of causal relationship, all the time. Did I use them correctly,
+i.e. were they followed by a conclusion and was it justified to draw that
+conclusion?
+\end{assignment}
+
+\begin{proof}[Answer]
+  First a general assessment: The lectures were generally well-balanced, with a good mix of examples, intuition, and rigor when appropriate. The aesthetic of the slides (i.e. font and color schemes) was well-chosen in all the lectures. Most of the time, the slides felt clean and uncluttered, with some exceptions which will be considered below. The level of the lectures was appropriate in all cases, perhaps with a minor exception which will be mentioned below.
+
+\textbf{Pell's Equation:} The lecture was, in the lecturer's own words, meant for an ''informed but non-specialized'' audience. The lecture did a good job of motivating why its content is worth listening to, by quickly asking and answering the question ''why is Pell's Equation interesting?''. The lecture was structured in such a way that each part was motivated by the preceding parts (for instance introducing continued fractions as a means to find fundamental solutions). The slides got a bit cluttered at times, more precisely during calculations. By the nature of calculations this is probably unavoidable, so it might be pertinent to ask whether including the calculations elucidate the subject to the listeners better than if they were omitted. The mathematical language used was clear and precise.
+
+\textbf{Modules:} Here, the intended audience was students of mathematics studying a fictional course in arithmetic. Compared to the lecture on modules, this lecture contained considerably less explicit motivation of why things were introduced, which is perfectly in order in a lecture belonging to a course in the subject, where homework and other modes of examination can provide further motivation for definitions and theorems. The slides were well-balanced and never felt cluttered. Perhaps the definitions could have been a bit more clearly marked as such; in the slides, they were introduced in a linear format which might make it a bit harder for the students to take clear and concise notes. The lecture made liberal use of natural and interesting examples of the concepts being introduced, which is of utmost importance when introducing new concepts. There is a point to be made that Beamer slides can be said to be an inherently imperfect mode of presentation in lectures in mathematics courses at the university level, since they allow the lecturer to lecture more quickly than they (and hence the students) are able to write down what is being said. The mathematical language was again clear and precise.
+
+
+\textbf{Similarity:} Here, the audience was mathematics teachers, taking a course in geometry. The lecturer made the choice to make the lecture intensely geometrical, including pictures on almost every slide, as well as keeping the mathematical jargon to a minimal level. For the intended audience, presenting intuition for the subject is perhaps the most important part of the lecture since mathematics teachers are proably rather looking for new perspectives on the subjects to present to their students rather than brushing up on terminology. The content of the lecture was motivated quickly but concisely on the first slide, which was appropriate for the situation. The lecturer made good use of real-world examples of the concept being discussed, which is an excellent way to elucidate the subject to the listeners.
+
+
+
+\end{proof}
+
+\newpage
+\stepcounter{assignment}
+
+
+\begin{assignment}
+  Read the chapter \emph{Models and reality} in Gårding’s book \emph{Encounter with
+  mathematics} (available as an e-book at the university library). Write down
+  your thoughts both about his style of writing and about the contents. Lars
+  Gårding (1919-2014) was a professor of mathematics at Lund University
+  and a leading expert on partial differential equations. He has also written
+  on the history of mathematics.
+\end{assignment}
+
+\begin{proof}[Answer]
+  The chapter \emph{Models and reality} is a short meditation on the way that we humans use models - which to Gårding are, at their core, just conceptual frames for reasoning - to be able to relate to the world. In particular, Gårding introduces a multitude of mathematical concepts as models of real world phenomena (for example, the natural numbers as what happens when one thinks of objects only in term of their quantities). Gårding also discusses the way how reasoning using logic inside the conceptual frame provided by a model - a \emph{theory} in Gårding's words - to investigate the properties of the model and possibly extrapolate into learning about the world. Gårding also discusses different obstacles in obtaining knowledge through this framework of models and theories through a number of examples. He lists Newtonian celestial mechanics as an example where the model is a good representation of the real-world objects it tries to emulate, and the theory is tractable and provides scientists with ways to actually employ the model and its underlying theory to understand the world better. As a contrast, he mentions modern quantum field theory as a model whose theory is as yet not well enough understood, so that there is no well-defined theory of quantum field theory that also has interesting applications of any kind. Gårding also proposes that philosophical systems and religions are models, and suggests that ''trying to cover too much they overreach themselves'', and that these types of models are in no small part a way for humans to take refuge in an easier, more understandable conceptual frame of thinking than the often chatotic reality. Finally, Gårding talks about how what he calls ''second generation models'' - those more abstract ''models of models'' such as the linear space, which arose as a consequence of the systematization of mathematics - and the perhaps more intuitive models usually encountered earlier in mathematical schooling. According to Gårding, the mode of thinking that these models require does not come naturally to most people, who according to Gårding are ''at home only among numbers and simple geometrical figures'' even though (taliking about linear algebra and group theory) ''this stuff is so simple that everybody ought to understand it''.
+\vspace{11pt}
+
+  My impression is that Gårding thinks about mathematics as a collection of theories about mathematical models. The question is whether this is enough, considering that the things modelled by mathematical models tend, at least in this text, to mostly be things present in the real world, even though these things can be abstract properties such as quantity or shape. There is also the formalist view of mathematics as essentially symbol-pushing under well-defined rules, with associations of mathematical objects to real-world counterparts viewed as non-causal. I tend to mostly side with Gårding's view since intuition, analogy and association plays such a crucial role in (at least my own) mathematical reasoning. I am not knowledgeable enough to comment on the state of quantum field theory, but from friends taking theoretical physics I get the impression that quantum field theory has abandoned many of the principles underlying previous physical models. I think Gårding's comment on philosophical systems and religions as models is well-put and interesting, but I believe he is unnecessarily dismissive of both; more precisely, I think the relationship of a thinking person to their religion or philosophical system is much more complicated and less one-sided than that they completely surrender their view of the world to that of the model, as Gårding seems to suggest. A religion or philosophical system can instead be one of a multitude of ways for a person to gain insights about the world. I find his discussion on second-generation models a bit strange; why would most people be interested at all in such models? A mathematically inclined person might find pleasure in thinking of symmetries using group theory, but I think the average person has much more pressing things to think about which require little to no knowledge of these second-generation models.
+
+  Finally, a comment on the writing style: I found Gårding exceptionally clear as an expositor. His reasoning is easy to follow, he does not get lost in jargon, and his figures are understated yet clear.
+
+
 \end{proof}
 \end{document}
